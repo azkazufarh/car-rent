@@ -1,4 +1,4 @@
-<div class="bg-white rounded">
+<a href="{{ route('car.show', 1) }}" class="bg-white rounded">
     <img src="https://www.amalgamcollection.com/cdn/shop/files/Wideedit_44fe4a82-c08b-449e-87e3-5380099e6329_2000x850_crop_center.jpg?v=1706017250" class="w-full h-48 object-cover object-center">
     <div class="p-4">
         <div class="flex justify-between items-center">
@@ -11,4 +11,4 @@
             <button class="bg-purple-600 text-white px-4 py-2 rounded-full">Rent Now</button>
         </div>
     </div>
-</div>
+</a>
