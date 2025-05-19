@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -12,7 +13,14 @@ class CarController extends Controller
      */
     public function index()
     {
-        return view('car.index');
+        $cars = User::find(1)
+            ->cars()
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('car.index', [
+            'cars' => $cars,
+        ]);
     }
 
     /**
@@ -36,7 +44,9 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return view('car.show');
+        return view('car.show', [
+            'car' => $car,
+        ]);
     }
 
     /**
@@ -65,6 +75,27 @@ class CarController extends Controller
 
     public function search()
     {
-        return view('car.search');
+        $query = Car::where('published_at', '!=', null)
+            ->with(['primaryImages', 'city', 'carType', 'fuelType', 'maker', 'model'])
+            ->orderBy('published_at', 'desc');
+
+        $cars = $query->paginate(12);
+
+        return view('car.search', [
+            'cars' => $cars
+        ]);
+    }
+
+/*************  ✨ Windsurf Command ⭐  *************/
+/*******  98ef35ed-966d-48fa-89b8-49c5861acda7  *******/
+    public function watchlist()
+    {
+        $cars = User::find(1)
+            ->favoriteCars;
+
+
+        return view('car.watchlist', [
+            'cars' => $cars,
+        ]);
     }
 }

@@ -14,9 +14,9 @@
     <div class="px-6">
         <h2 class="text-3xl font-bold">Popular Cars</h2>
         <div class="grid grid-cols-4 gap-4 mt-4">
-            @for($i = 1; $i < 15; $i++)
-                <x-card />
-            @endfor
+            @foreach ($cars as $car)
+                <x-card :$car />
+            @endforeach
         </div>
     </div>
 </x-app-layout>

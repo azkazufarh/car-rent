@@ -13,10 +13,10 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="col-span-1">
                 <div class="bg-white p-4 m-2 rounded-lg shadow-lg mb-4">
-                    <p class="text-gray-600">Found <b>4,568</b> cars</p>
+                    <p class="text-gray-600">Found <b>{{ $cars->total() }}</b> cars</p>
                 </div>
 
-                <form action="{{ route('car.search') }}" method="GET" class="bg-white p-4 m-2 rounded-lg shadow-lg mb-4">
+                <form action="" method="GET" class="bg-white p-4 m-2 rounded-lg shadow-lg mb-4">
                     <div class="mb-4">
                         <label for="maker" class="block text-gray-700 mb-2">Maker</label>
                         <select name="maker" id="maker" class="block w-full border border-gray-300 rounded p-2">
@@ -96,9 +96,11 @@
 
             <div class="col-span-2">
                 <div class="grid grid-cols-2 gap-4">
-                    @for ($i = 0; $i < 6; $i++)
-                        <x-card />
-                    @endfor
+                    @foreach ($cars as $car)
+                        <x-card :$car />
+                    @endforeach
+
+                    {{ $cars->links() }}
                 </div>
             </div>
         </div>
